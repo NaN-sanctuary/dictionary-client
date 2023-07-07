@@ -6,9 +6,15 @@ import { ListItemProps } from '../interfaces';
 const ListItem: React.FC<ListItemProps> = ({ item }) => {
   return (
     <View style={styles.container}>
-      <View style={styles.termContainer}>
-        <Text style={styles.termText}>{item.word}</Text>
+      <View style={styles.headerContainer}>
+        <View style={styles.termContainer}>
+          <Text style={styles.termText}>{item.word}</Text>
+        </View>
+        <View style={styles.userContainer}>
+          <Text style={styles.userText}>{item.user.name}</Text>
+        </View>
       </View>
+
       <View style={styles.definitionContainer}>
         <Text style={styles.definitionText}>{item.definition}</Text>
       </View>
@@ -30,6 +36,17 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 16,
     marginBottom: 8,
+  },
+  headerContainer: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
+  },
+  userContainer: {},
+  userText: {
+    fontSize: 14,
+    color: '#FFFFFF',
+    textAlign: 'right',
   },
   termContainer: {
     marginBottom: 8,

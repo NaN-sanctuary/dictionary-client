@@ -7,29 +7,35 @@ import fetchListData from './services/FetchListData';
 
 export default function App() {
   const [data, setData] = useState<DictionaryItem[]>([]);
+  const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const listData = await fetchListData();
-        setData(listData);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
     fetchData();
   }, []);
+
+  const fetchData = async () => {
+    try {
+      setRefreshing(true);
+      const listData = await fetchListData();
+      setData(listData);
+      setRefreshing(false);
+    } catch (error) {
+      console.error(error);
+      setRefreshing(false);
+    }
+  };
 
   const renderItem = ({ item }: { item: DictionaryItem }) => (
     <ListItem item={item} />
   );
-  console.log(data)
+
   return (
     <FlashList
       data={data}
       renderItem={renderItem}
       estimatedItemSize={100}
+      refreshing={refreshing}
+      onRefresh={fetchData}
     />
   );
 }
