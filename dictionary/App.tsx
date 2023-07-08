@@ -1,9 +1,9 @@
 import { FlashList } from '@shopify/flash-list';
 import React, { useEffect, useState } from 'react';
 import ListItem from './components/ListItem';
-
 import { DictionaryItem } from './interfaces';
 import fetchListData from './services/FetchListData';
+
 
 export default function App() {
   const [data, setData] = useState<DictionaryItem[]>([]);
