@@ -10,16 +10,20 @@ import Navbar from '../components/navbar/NavBar';
 
 const HomeScreen: React.FC = () => {
   const [data, setData] = useState<DictionaryItem[]>([]);
+  const [filteredData, setFilteredData] = useState<DictionaryItem[]>([]);
   const [refreshing, setRefreshing] = useState(false);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
   }, []);
+
 
   const fetchData = async () => {
     try {
       setRefreshing(true);
       const listData = await fetchListData();
       setData(listData);
+      setFilteredData(listData);
       setRefreshing(false);
     } catch (error) {
       console.error(error);
@@ -38,23 +42,26 @@ const HomeScreen: React.FC = () => {
   };
 
   const handleSearch = (searchText: string) => {
-    // Implement search logic based on the provided searchText
-    console.log('Search:', searchText);
+    const filteredItems = data.filter(item =>
+      item.example.toLowerCase().includes(searchText.toLowerCase())
+    );
+    setSearch(searchText)
+    setFilteredData(filteredItems);
   };
 
   return (
     <View style={styles.container}>
       <Navbar/>
       <SearchBar
-        placeholder="Search..."
         onChangeText={handleSearch}
         containerStyle={styles.searchBarContainer}
         inputContainerStyle={styles.searchBarInputContainer}
         inputStyle={styles.searchBarInput}
+        value={search}
       />
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <FlashList
-          data={data}
+          data={filteredData}
           renderItem={renderItem}
           estimatedItemSize={100}
           refreshing={refreshing}
@@ -97,13 +104,13 @@ const styles = StyleSheet.create({
     borderTopWidth: 0,
     borderBottomWidth: 0,
     padding: 0,
-    marginHorizontal: 16,
+    marginHorizontal: 0,
   },
   searchBarInputContainer: {
     backgroundColor: '#f2f2f2',
   },
   searchBarInput: {
-    fontSize: 16,
+    fontSize: 22,
   },
 });
 
