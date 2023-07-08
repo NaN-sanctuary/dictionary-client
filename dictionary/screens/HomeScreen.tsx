@@ -6,13 +6,13 @@ import { FAB, SearchBar } from 'react-native-elements';
 import ListItem from '../components/ListItem';
 import { DictionaryItem } from '../interfaces';
 import fetchListData from '../services/FetchListData';
+import Navbar from '../components/navbar/NavBar';
 
 const HomeScreen: React.FC = () => {
   const [data, setData] = useState<DictionaryItem[]>([]);
   const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
-    fetchData();
   }, []);
 
   const fetchData = async () => {
@@ -44,9 +44,7 @@ const HomeScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.navigationContainer}>
-        <Text style={styles.navigationTitle}>Dictionary</Text>
-      </View>
+      <Navbar/>
       <SearchBar
         placeholder="Search..."
         onChangeText={handleSearch}
