@@ -74,6 +74,22 @@ const SignInWithGoogleScreen: React.FC = () => {
     }
   };
 
+  const verifyUser = async () => {
+    if (!id_token) return;
+    try {
+      const response = await fetch(
+        "http://localhost:5005/api/User/verify",
+        {
+          method: 'POST',
+          headers: { Authorization: `Bearer ${id_token}` },
+        }
+      );
+      console.log(response);
+    } catch (error) {
+      // Add your own error handler here
+    }
+  }
+
 
   return (
     <View style={styles.container}>
@@ -93,6 +109,7 @@ const SignInWithGoogleScreen: React.FC = () => {
             AsyncStorage.removeItem("@user")
             setUserInfo(null);
           }} />
+          <Button title={'VERIFY'} onPress={verifyUser}/>
         </View>
       )}
     </View>
