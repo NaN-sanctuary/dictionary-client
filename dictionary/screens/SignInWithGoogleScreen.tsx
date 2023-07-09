@@ -1,34 +1,48 @@
 // web: 787020276670-pcd7dqjtsvvt7e655lelkr2tmaa67b15.apps.googleusercontent.com
-import { default as React, useState, useEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import * as WebBrowser from "expo-web-browser";
-import * as Google from "expo-auth-session/providers/google";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as Google from "expo-auth-session/providers/google";
+import * as Crypto from 'expo-crypto';
+import * as WebBrowser from "expo-web-browser";
+import { default as React, useEffect, useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 import { Button } from 'react-native-elements';
+
+
 
 WebBrowser.maybeCompleteAuthSession();
 
 const SignInWithGoogleScreen: React.FC = () => {
 
-  const [token, setToken] = useState<string>("");
+  const [id_token, setIdToken] = useState<string>("");
+  const [access_token, setAccessToken] = useState<string>("");
   const [userInfo, setUserInfo] = useState(null);
 
   const [request, response, promptAsync] = Google.useAuthRequest({
     androidClientId: "",
     iosClientId: "",
     webClientId: "787020276670-pcd7dqjtsvvt7e655lelkr2tmaa67b15.apps.googleusercontent.com",
+    responseType: "id_token token",
+    extraParams: {
+      nonce: Crypto.getRandomBytesAsync(16).toString()
+    },
+    usePKCE: false,
   });
+
   useEffect(() => {
     handleEffect();
-  }, [response, token]);
+  }, [response]);
+
+  useEffect(() => {
+    getUserInfo();
+  }, [access_token]);
 
   async function handleEffect() {
     const user = await getLocalUser();
-    console.log("user", user);
+    // console.log("user", user);
     if (!user) {
       if (response?.type === "success") {
-        setToken(response.authentication.accessToken);
-        getUserInfo(response.authentication.accessToken);
+        setIdToken(response.params.id_token);
+        setAccessToken(response.params.access_token);
       }
     } else {
       setUserInfo(user);
@@ -42,16 +56,16 @@ const SignInWithGoogleScreen: React.FC = () => {
     return JSON.parse(data);
   };
 
-  const getUserInfo = async (token: string) => {
-    if (!token) return;
+
+  const getUserInfo = async () => {
+    if (!access_token) return;
     try {
       const response = await fetch(
         "https://www.googleapis.com/userinfo/v2/me",
         {
-          headers: { Authorization: `Bearer ${token}` },
+          headers: { Authorization: `Bearer ${access_token}` },
         }
       );
-
       const user = await response.json();
       await AsyncStorage.setItem("@user", JSON.stringify(user));
       setUserInfo(user);
@@ -69,7 +83,7 @@ const SignInWithGoogleScreen: React.FC = () => {
       }} />
       ) : (
         <View style={styles.card}>
-          <Text style={styles.text}>Token: {token}</Text>
+          <Text style={styles.text}>Token: {access_token}</Text>
           <Text style={styles.text}>Email: {userInfo.email}</Text>
           <Text style={styles.text}>
             Verified: {userInfo.verified_email ? "yes" : "no"}

@@ -4,6 +4,7 @@ import { ListItemProps } from '../interfaces';
 
 
 const ListItem: React.FC<ListItemProps> = ({ item }) => {
+  console.log(item)
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
@@ -11,7 +12,7 @@ const ListItem: React.FC<ListItemProps> = ({ item }) => {
           <Text style={styles.termText}>{item.word}</Text>
         </View>
         <View style={styles.userContainer}>
-          <Text style={styles.userText}>{item.user.name}</Text>
+          <Text style={styles.userText}>{item.user?.name}</Text>
         </View>
       </View>
 
