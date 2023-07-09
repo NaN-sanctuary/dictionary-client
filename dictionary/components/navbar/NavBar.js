@@ -18,6 +18,11 @@ function NavBar() {
         navigation.navigate('AddWord');
     };
 
+    const handleNavigateSignInWithGoogle = () => {
+        setClick(!click);
+        navigation.navigate('SignInWithGoogle');
+    };
+
     return (
         <>
             <nav className="navbar">
@@ -26,17 +31,22 @@ function NavBar() {
                         <li className="nav-item">
                             <div
                                 className="nav-links"
-                                onClick={handleGoHome}
-                            >
+                                onClick={handleGoHome}>
                                 Home
                             </div>
                         </li>
                         <li className="nav-item">
                             <div
                                 className="nav-links"
-                                onClick={handleClick}
-                            >
+                                onClick={handleClick}>
                                 Contact Us
+                            </div>
+                        </li>
+                        <li className="nav-item">
+                            <div
+                                className="nav-links"
+                                onClick={handleNavigateSignInWithGoogle}>
+                                Login with google
                             </div>
                         </li>
                     </ul>

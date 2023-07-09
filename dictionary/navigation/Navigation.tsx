@@ -2,6 +2,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import AddWordScreen from '../screens/AddWordScreen';
+import SignInWithGoogleScreen from '../screens/SignInWithGoogleScreen';
 import HomeScreen from '../screens/HomeScreen';
 
 const Stack = createStackNavigator();
@@ -19,6 +20,11 @@ const Navigation: React.FC = () => {
           name="AddWord"
           component={AddWordScreen}
           options={{ title: 'Add Word' }}
+        />
+          <Stack.Screen
+          name="SignInWithGoogle"
+          component={SignInWithGoogleScreen}
+          options={{ title: 'Login with google' }}
         />
       </Stack.Navigator>
     </NavigationContainer>
