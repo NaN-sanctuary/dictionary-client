@@ -1,12 +1,12 @@
 import { useNavigation } from '@react-navigation/native';
 import { FlashList } from '@shopify/flash-list';
 import { default as React, useEffect, useState } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import { FAB, SearchBar } from 'react-native-elements';
 import ListItem from '../components/ListItem';
+import Navbar from '../components/navbar/NavBar';
 import { DictionaryItem } from '../interfaces';
 import fetchListData from '../services/FetchListData';
-import Navbar from '../components/navbar/NavBar';
 
 const HomeScreen: React.FC = () => {
   const [data, setData] = useState<DictionaryItem[]>([]);
@@ -15,6 +15,7 @@ const HomeScreen: React.FC = () => {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
+    fetchData();
   }, []);
 
 
