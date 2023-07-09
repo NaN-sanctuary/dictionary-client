@@ -1,5 +1,6 @@
 // web: 787020276670-pcd7dqjtsvvt7e655lelkr2tmaa67b15.apps.googleusercontent.com
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as AuthSession from "expo-auth-session";
 import * as Google from "expo-auth-session/providers/google";
 import * as Crypto from 'expo-crypto';
 import * as WebBrowser from "expo-web-browser";
@@ -90,6 +91,10 @@ const SignInWithGoogleScreen: React.FC = () => {
     }
   }
 
+  const revokeToken = async () => {
+    await AuthSession.revokeAsync({ token: access_token, clientId: "787020276670-pcd7dqjtsvvt7e655lelkr2tmaa67b15.apps.googleusercontent.com" }, Google.discovery)
+  }
+
 
   return (
     <View style={styles.container}>
@@ -106,10 +111,11 @@ const SignInWithGoogleScreen: React.FC = () => {
           </Text>
           <Text style={styles.text}>Name: {userInfo.name}</Text>
           <Button title="Log out" onPress={() => {
+            revokeToken()
             AsyncStorage.removeItem("@user")
             setUserInfo(null);
           }} />
-          <Button title={'VERIFY'} onPress={verifyUser}/>
+          <Button title={'VERIFY'} onPress={verifyUser} />
         </View>
       )}
     </View>
