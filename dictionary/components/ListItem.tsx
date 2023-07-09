@@ -1,9 +1,26 @@
+import { MaterialIcons } from '@expo/vector-icons';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { ListItemProps } from '../interfaces';
+import { Button } from 'react-native-elements';
 
 
 const ListItem: React.FC<ListItemProps> = ({ item }) => {
+  
+  // const upvote = async () => {
+  //   const fetchData = async () => {
+  //     try {
+  //       setRefreshing(true);
+  //       const listData = await fetchListData();
+  //       setData(listData);
+  //       setFilteredData(listData);
+  //       setRefreshing(false);
+  //     } catch (error) {
+  //       console.error(error);
+  //       setRefreshing(false);
+  //     }
+  //   };
+  // }
+
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
@@ -22,9 +39,22 @@ const ListItem: React.FC<ListItemProps> = ({ item }) => {
         <Text style={styles.exampleText}>{item.example}</Text>
       </View>
       <View style={styles.votesContainer}>
-        <Text style={styles.votesText}>
-          {item.upvotes} Upvotes | {item.downvotes} Downvotes
-        </Text>
+        <Button
+          icon={
+            <MaterialIcons name="arrow-drop-up" size={24} color="#fff" />
+          }
+          buttonStyle={styles.voteButtonStyle}
+          title={`${item.upvotes}`}
+        />
+        <Button
+          icon={
+            <MaterialIcons name="arrow-drop-down" size={24} color="#fff" />
+          }
+          buttonStyle={styles.voteButtonStyle}
+          title={`${item.downvotes}`}
+
+        />
+        
       </View>
     </View>
   );
@@ -71,11 +101,19 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
     color: '#FFFFFF',
   },
-  votesContainer: {},
+  votesContainer: {
+    flex:1,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   votesText: {
     fontSize: 14,
     color: '#FFFFFF',
   },
+  voteButtonStyle: {
+    backgroundColor: '#005BBB',
+    color: '#fff'
+  }
 });
 
 export default ListItem;
