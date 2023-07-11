@@ -30,16 +30,19 @@ const SignInWithGoogleScreen: React.FC = () => {
   });
 
   useEffect(() => {
-    handleEffect();
+    handleUserLogin();
   }, [response]);
 
   useEffect(() => {
     getUserInfo();
   }, [access_token]);
 
-  async function handleEffect() {
+  async function handleUserLogin() {
+    await saveUserLoginData();
+  }
+
+  async function saveUserLoginData() {
     const user = await getLocalUser();
-    // console.log("user", user);
     if (!user) {
       if (response?.type === "success") {
         setIdToken(response.params.id_token);

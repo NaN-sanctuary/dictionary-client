@@ -14,14 +14,14 @@ const Navigation: React.FC = () => {
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={{ title: 'Dictionary', headerShown: false}}
+          options={{ title: 'Dictionary', headerShown: false }}
         />
         <Stack.Screen
           name="AddWord"
           component={AddWordScreen}
           options={{ title: 'Add Word' }}
         />
-          <Stack.Screen
+        <Stack.Screen
           name="SignInWithGoogle"
           component={SignInWithGoogleScreen}
           options={{ title: 'Login with google' }}

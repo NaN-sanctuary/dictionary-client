@@ -52,7 +52,7 @@ const HomeScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Navbar/>
+      <Navbar />
       <SearchBar
         onChangeText={handleSearch}
         containerStyle={styles.searchBarContainer}
