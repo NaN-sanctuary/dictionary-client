@@ -8,14 +8,19 @@ export default function NavBar() {
             <nav>
                 <ul>
                     <li>
-                        <Link to="/">Home</Link>
+                        <Link to="/">Головна</Link>
                     </li>
                     <li>
-                        <Link to="/blog">Blog</Link>
+                        <Link to="/blog">Блог</Link>
+                    </li>
+                    <li>
+                        <Link to="/add">Додати слово</Link>
+                    </li>
+                    <li>
+                        <input type="search" id="search" name="search" placeholder="Пошук"></input>
                     </li>
                 </ul>
             </nav >
-
             <Outlet />
         </>
     );

@@ -5,6 +5,8 @@ import NavBar from './components/navbar/Navbar';
 
 import Home from './pages/Home';
 import Blog from './pages/Blog';
+import Add from './pages/Add';
+
 
 export default function App() {
   return (
@@ -13,6 +15,7 @@ export default function App() {
         <Route path="/" element={<NavBar />}>
           <Route index element={<Home />} />
           <Route path="blog" element={<Blog />} />
+          <Route path="add" element={<Add />} />
         </Route>
       </Routes>
     </BrowserRouter>
