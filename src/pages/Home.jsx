@@ -1,6 +1,11 @@
+import LoginWithGoogle from "../components/LoginWithGoogle/LoginWithGoogle";
+
 const Home = () => {
     return (
-        <>DUML Home</>
+        <>
+            <h1>Словник української сучасної мови.</h1>
+            <LoginWithGoogle />
+        </>
     )
 }
 

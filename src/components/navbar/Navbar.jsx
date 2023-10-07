@@ -3,7 +3,7 @@ import { Outlet, Link } from "react-router-dom";
 import { FaBeer } from 'react-icons/fa';
 import './NavBar.css';
 
-import SearchBar from "../searchbar/SearchBar";
+import SearchBar from "../SearchBar/SearchBar";
 
 export default function NavBar() {
     const [click, setClick] = useState(false);

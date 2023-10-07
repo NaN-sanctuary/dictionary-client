@@ -1,11 +1,11 @@
 import './App.css'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import NavBar from './components/navbar/Navbar';
+import NavBar from './components/NavBar/Navbar';
 
 import Home from './pages/Home';
 import Blog from './pages/Blog';
-import Add from './pages/Add';
+import Add from './pages/Add/Add';
 
 
 export default function App() {
