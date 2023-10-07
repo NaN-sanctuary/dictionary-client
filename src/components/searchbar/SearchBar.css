@@ -1,0 +1,17 @@
+.search-root {
+    position: relative;
+    width: fit-content;
+    top: 7.5px;
+    width: 500px;
+    margin-right: 40px;
+    min-width: 250px;
+    max-width: 800px;
+}
+
+@media screen and (max-width: 860px) {
+    .search-root {
+        display: block;
+        margin-left: 10px;
+        margin-right: 100px;
+    }
+}

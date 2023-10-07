@@ -3,6 +3,8 @@ import { Outlet, Link } from "react-router-dom";
 import { FaBeer } from 'react-icons/fa';
 import './NavBar.css';
 
+import SearchBar from "../searchbar/SearchBar";
+
 export default function NavBar() {
     const [click, setClick] = useState(false);
     const handleClick = () => setClick(!click);
@@ -11,9 +13,7 @@ export default function NavBar() {
         <>
             <nav>
                 <div className="nav-container">
-                    <div className="search-root">
-                        <input className="search" type="search" id="search" name="search" placeholder="Пошук"></input>
-                    </div>
+                    <SearchBar />
                     <ul className={click ? "menu active" : "menu"}>
                         <li className="menu-item">
                             <Link to="/" onClick={handleClick}>Головна</Link>

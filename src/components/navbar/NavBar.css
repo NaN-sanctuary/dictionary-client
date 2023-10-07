@@ -1,12 +1,11 @@
-
 nav {
-    position: fixed;
-    top: 0;
-    left: 0%;
-    list-style-type: none;
-    width: 100%;
-    margin-left: 'auto';
-    background-color: #333;
+  position: fixed;
+  top: 0;
+  left: 0%;
+  list-style-type: none;
+  width: 100%;
+  margin-left: 'auto';
+  background-color: #333;
 }
 
 .nav-container {
@@ -19,16 +18,6 @@ nav {
   position: relative;
 }
 
-.search-root {
-  position: relative;
-  width: fit-content;
-  top: 7.5px;
-  width: 500px;
-  margin-right: 40px;
-  min-width: 250px;
-  max-width: 800px;
-}
-
 .menu {
   display: flex;
   list-style: none;
@@ -36,20 +25,22 @@ nav {
   margin-right: 2rem;
   background-color: #333;
 }
-  
-li {float: right;}
+
+li {
+  float: right;
+}
 
 li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
 }
-  
-  /* Change the link color to #111 (black) on hover */
+
+/* Change the link color to #111 (black) on hover */
 li a:hover {
-    background-color: #111;
+  background-color: #111;
 }
 
 .menu-icon {
@@ -58,12 +49,13 @@ li a:hover {
 }
 
 @media screen and (max-width: 860px) {
-  .nav-container{
-  justify-content:left;
+  .nav-container {
+    justify-content: left;
   }
+
   .menu {
     display: flex;
-    width:100%;
+    width: 100%;
     position: absolute;
     top: 80px;
     left: -100%;
@@ -72,7 +64,7 @@ li a:hover {
     background-color: #333;
     border-collapse: collapse;
   }
-  
+
   .menu.active {
     left: 0%;
     opacity: 1;
@@ -86,12 +78,6 @@ li a:hover {
     padding: 1.5rem;
     width: 100%;
     border-collapse: collapse;
-  }
-
-  .search-root{
-    display: block;
-    margin-left: 10px;
-    margin-right: 100px;
   }
 
   .menu-icon {
