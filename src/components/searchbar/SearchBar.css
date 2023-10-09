@@ -1,11 +1,21 @@
 .search-root {
-    position: relative;
     width: fit-content;
     top: 7.5px;
     width: 500px;
     margin-right: 40px;
     min-width: 250px;
     max-width: 800px;
+    transform: translate(0, 10%);
+}
+
+.results-root {
+    position: absolute;
+    justify-content: flex-end;
+    flex-direction: column;
+}
+
+.result {
+    background-color: #242f5f;
 }
 
 @media screen and (max-width: 860px) {

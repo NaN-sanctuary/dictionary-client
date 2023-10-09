@@ -12,24 +12,44 @@ const LoginWithGoogle = () => {
         onError: (error) => console.log('Login Failed:', error)
     });
 
+    const handleLogin = () => {
+        login();
+        verifyUser();
+    };
     const logOut = () => {
         googleLogout();
         setProfile(null);
     };
 
+    const verifyUser = async () => {
+        if (!user.access_token) return;
+        try {
+            const response = await fetch(
+                "https://localhost:44388/test",
+                {
+                    method: 'GET',
+                    headers: { Authorization: `Bearer ${user.access_token}` },
+                }
+            );
+            console.log(response);
+        } catch (error) {
+            // Add your own error handler here
+        }
+    }
+
     useEffect(
         () => {
             if (user) {
-                axios
-                    .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`, {
-                        headers: {
-                            Authorization: `Bearer ${user.access_token}`,
-                            Accept: 'application/json'
-                        }
-                    })
-                    .then((res) => {
-                        setProfile(res.data);
-                    })
+                axios.get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`, {
+                    headers: {
+                        Authorization: `Bearer ${user.access_token}`,
+                        Accept: 'application/json'
+                    }
+                }).then((res) => {
+                    console.log(res.data);
+                    console.log(user);
+                    setProfile(res.data);
+                })
                     .catch((err) => console.log(err));
             }
         },
@@ -46,7 +66,7 @@ const LoginWithGoogle = () => {
                         <button onClick={logOut}>Log out</button>
                     </div>
                 ) : (
-                    <button onClick={() => login()}>Sign in with Google 🚀 </button>
+                    <button onClick={() => handleLogin}>Sign in with Google 🚀 </button>
                 )}
             </div>
         </>
